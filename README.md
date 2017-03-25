@@ -1,0 +1,2 @@
+# Tag! You're it!
+<i>Tag! You're it!</i> is an Android application that allows users to play tag but without having to physically touch one another. Players will be alerted if others in the same game are nearby. Players will then proceed to either avoid being tagged or chase their target. 

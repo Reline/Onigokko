@@ -1,0 +1,26 @@
+# IntelliJ IDEA
+.idea
+*.iml
+annotations
+classes
+captures
+projectFilesBackup
+
+# Generated
+bin
+gen
+build
+out
+lib
+
+# Gradle
+.gradle
+gradlew.bat
+local.properties
+reports
+jacoco.exec
+
+.DS_Store
+*.keystore
+*.jks
+keystore.properties

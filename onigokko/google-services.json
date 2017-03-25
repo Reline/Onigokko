@@ -1,0 +1,56 @@
+{
+  "project_info": {
+    "project_number": "446216871",
+    "project_id": "tag-youre-it"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:446216871:android:984d6fd917e878fc",
+        "android_client_info": {
+          "package_name": "com.reline.tag"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "446216871-dsqi8ejsn1h5vp8pu2u0idod82o1kqvv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.reline.tag",
+            "certificate_hash": "44D40AC677D062ACF8E21700C17C71FEF2771513"
+          }
+        },
+        {
+          "client_id": "446216871-jti38v0fra87cbuljp9plm97pcp27uv0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.reline.tag",
+            "certificate_hash": "C174CBFDFDD6C0223CAC617DE9735E9403CEBACE"
+          }
+        },
+        {
+          "client_id": "446216871-2vpapasgf5m51b6553atronqbecckk34.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDqyT3vfD_LgDERlhMzdeRxZ58B-x6wW0M"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

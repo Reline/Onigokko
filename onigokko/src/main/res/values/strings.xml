@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Tag! You\'re it!</string>
+    <string name="server_client_id">446216871–5l7iut3n5anuuang7l4qq4lfdv2vvjib.apps.googleusercontent.com</string>
+
+    <!-- Login -->
+    <string name="signed_out">You have been signed out.</string>
+    <string name="signed_in">You have been signed in.</string>
+
+</resources>
