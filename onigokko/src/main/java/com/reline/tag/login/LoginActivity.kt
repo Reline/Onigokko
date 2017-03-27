@@ -6,14 +6,13 @@ import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import com.google.android.gms.auth.api.Auth
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
-import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.SignInButton
 import com.google.android.gms.common.api.GoogleApiClient
 import com.reline.tag.R
 import kotterknife.bindView
 
 
-class LoginActivity : AppCompatActivity(), ILoginView, GoogleApiClient.OnConnectionFailedListener {
+class LoginActivity : AppCompatActivity(), ILoginView {
 
     private val TAG = LoginActivity::class.java.simpleName
 
@@ -63,9 +62,5 @@ class LoginActivity : AppCompatActivity(), ILoginView, GoogleApiClient.OnConnect
                 presenter.onTokenReceived(idToken ?: String())
             }
         }
-    }
-
-    override fun onConnectionFailed(connectionResult: ConnectionResult) {
-        Log.e(TAG, connectionResult.errorMessage)
     }
 }
