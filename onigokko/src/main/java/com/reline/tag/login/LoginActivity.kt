@@ -58,8 +58,9 @@ class LoginActivity : AppCompatActivity(), ILoginView {
             Log.d(TAG, "onActivityResult: result.isSuccess = ${result.isSuccess}")
 
             if (result.isSuccess) {
-                val idToken = result.signInAccount!!.idToken
-                presenter.onTokenReceived(idToken ?: String())
+                val account = result.signInAccount
+                val idToken = account?.idToken
+                presenter.onTokenReceived(idToken ?: "", account?.displayName ?: "")
             }
         }
     }

@@ -13,7 +13,8 @@ import com.reline.tag.database.DatabaseAccessObject;
 import com.reline.tag.injection.component.DaggerPresenterComponent;
 import com.reline.tag.injection.module.DatabaseModule;
 import com.reline.tag.injection.module.NetworkModule;
-import com.reline.tag.network.HelloService;
+import com.reline.tag.model.Player;
+import com.reline.tag.network.PlayerService;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -32,7 +33,7 @@ public class LoginPresenter extends Presenter<ILoginView> implements GoogleApiCl
     DatabaseAccessObject dao;
 
     @Inject
-    HelloService service;
+    PlayerService service;
 
     public LoginPresenter() {
         DaggerPresenterComponent.builder()
@@ -42,15 +43,17 @@ public class LoginPresenter extends Presenter<ILoginView> implements GoogleApiCl
                 .build().inject(this);
     }
 
-    public void onTokenReceived(@NotNull String token) {
+    public void onTokenReceived(@NotNull String token, @NotNull String name) {
         Log.d(TAG, "onTokenReceived() called with: token = [" + token + "]");
         dao.saveToken(token);
-        service.sayHello()
+        Player player = new Player(name);
+        service.createPlayer(player)
                 .enqueue(new Callback<ResponseBody>() {
                     @Override
                     public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                         try {
-                            Log.d(TAG, "onResponse() called with: " + response.body().string());
+                            String string = response.body() != null ? response.body().string() : "";
+                            Log.d(TAG, "onResponse() called with: [" + string + "]");
                         } catch (IOException e) {
                             Log.e(TAG, "onResponse: " + e.getMessage(), e);
                         }

@@ -1,7 +1,8 @@
 package com.reline.tag.injection.module;
 
 import com.reline.tag.database.DatabaseAccessObject;
-import com.reline.tag.network.HelloService;
+import com.reline.tag.network.PlayerService;
+import com.squareup.moshi.Moshi;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -25,13 +26,15 @@ import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
+import okhttp3.logging.HttpLoggingInterceptor;
 import okio.Buffer;
 import retrofit2.Retrofit;
+import retrofit2.converter.moshi.MoshiConverterFactory;
 
 @Module(includes = DatabaseModule.class)
 public class NetworkModule {
 
-    private static final String BASE_URL = "https://projectplay.xyz:8443";
+    private static final String BASE_URL = "https://projectplay.xyz:8443/onigokko/";
     private static final String CERT = "-----BEGIN CERTIFICATE-----\n" +
             "MIIFAjCCA+qgAwIBAgISA3E0JcOWjqS23hx9LQgb9TftMA0GCSqGSIb3DQEBCwUA\n" +
             "MEoxCzAJBgNVBAYTAlVTMRYwFAYDVQQKEw1MZXQncyBFbmNyeXB0MSMwIQYDVQQD\n" +
@@ -135,22 +138,31 @@ public class NetworkModule {
 
     @Provides
     OkHttpClient provideOkHttpClient(SSLSocketFactory sslSocketFactory, X509TrustManager trustManager, Interceptor interceptor) {
+        HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
+        loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BASIC);
         return new OkHttpClient.Builder()
                 .sslSocketFactory(sslSocketFactory, trustManager)
                 .addInterceptor(interceptor)
+                .addInterceptor(loggingInterceptor)
                 .build();
     }
 
     @Provides
-    Retrofit provideRetrofit(OkHttpClient okHttpClient) {
+    Moshi provideMoshi() {
+        return new Moshi.Builder().build();
+    }
+
+    @Provides
+    Retrofit provideRetrofit(OkHttpClient okHttpClient, Moshi moshi) {
         return new Retrofit.Builder()
                 .client(okHttpClient)
+                .addConverterFactory(MoshiConverterFactory.create(moshi))
                 .baseUrl(BASE_URL)
                 .build();
     }
 
     @Provides
-    HelloService provideHelloService(Retrofit retrofit) {
-        return retrofit.create(HelloService.class);
+    PlayerService providePlayerService(Retrofit retrofit) {
+        return retrofit.create(PlayerService.class);
     }
 }
